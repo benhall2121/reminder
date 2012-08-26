@@ -1,0 +1,34 @@
+
+<div  class="hero-unit">
+  <h1>Reminders</h1>
+</div> 
+
+<div class="row">
+  <div class="span6">
+    <%= link_to 'New Reminder', new_reminders_main_path %>
+  </div>
+</div>
+
+<div id="remindersMains">
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Reminder ID</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reminders_mains.each do |reminders_main| %>
+        <tr>
+          <td><%= link_to reminders_main.id, edit_reminders_main_path(reminders_main) %></td>
+          <td>
+            <% reminders_main.reminderMessages.each do |a| %>
+              <%= link_to a.message, edit_reminders_main_path(reminders_main) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

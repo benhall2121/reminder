@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Message:</b>
+  <%= @reminder_message.message %>
+</p>
+
+<p>
+  <b>Remindersmain:</b>
+  <%= @reminder_message.remindersMain_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_reminder_message_path(@reminder_message) %> |
+<%= link_to 'Back', reminder_messages_path %>

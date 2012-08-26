@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Remindersmain:</b>
+  <%= @reminder_task_list.remindersMain_id %>
+</p>
+
+<p>
+  <b>Triggerat:</b>
+  <%= @reminder_task_list.triggerAt %>
+</p>
+
+
+<%= link_to 'Edit', edit_reminder_task_list_path(@reminder_task_list) %> |
+<%= link_to 'Back', reminder_task_lists_path %>

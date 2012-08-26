@@ -1,0 +1,21 @@
+<h1>Listing reminder_tasks</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reminder_tasks.each do |reminder_task| %>
+  <tr>
+    <td><%= link_to 'Show', reminder_task %></td>
+    <td><%= link_to 'Edit', edit_reminder_task_path(reminder_task) %></td>
+    <td><%= link_to 'Destroy', reminder_task, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reminder task', new_reminder_task_path %>

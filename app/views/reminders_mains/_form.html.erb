@@ -1,0 +1,25 @@
+<%= form_for(@reminders_main, :html => { :multipart => true, :class => "form-horizontal"}) do |f| %>
+  <% if @reminders_main.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reminders_main.errors.count, "error") %> prohibited this reminders_main from being saved:</h2>
+
+      <ul>
+      <% @reminders_main.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <%= f.fields_for :reminderMessages do |builder| %>
+      <%= render "reminder_messages/reminder_messages_fields", :f => builder %>
+    <% end %>
+
+    <div class="form">
+      <%= f.submit 'Save', :class => 'btn btn-primary' %>
+    </div>
+
+  </fieldset>
+<% end %>
+

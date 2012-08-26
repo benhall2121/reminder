@@ -1,0 +1,17 @@
+<%= form_for(@reminder_task) do |f| %>
+  <% if @reminder_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reminder_task.errors.count, "error") %> prohibited this reminder_task from being saved:</h2>
+
+      <ul>
+      <% @reminder_task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
