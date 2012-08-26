@@ -1,5 +1,6 @@
 set :application, "reminder"
 
+set :user, "demo"
 #github stuff
 set :repository,  "git@github.com:benhall2121/reminder.git"
 set :scm, :git
@@ -8,9 +9,8 @@ set :scm, :git
 
 set :use_sudo,    false
 set :deploy_to,   "/home/#{user}/apps/#{application}"
+set :keep_releases, 3 
 
-#server login
-set :user, "demo"
 
 ssh_options[:forward_agent] = true
 
@@ -31,5 +31,3 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
 end
-
-ssh_options[:port] = 30000
