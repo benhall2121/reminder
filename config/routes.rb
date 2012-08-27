@@ -12,4 +12,7 @@ Reminder::Application.routes.draw do
 
   root :to => "reminders_mains#index"
 
+  
+  get "get_reminders" => "reminders_mains#get_reminders", :as => "get_reminders"
+
 end

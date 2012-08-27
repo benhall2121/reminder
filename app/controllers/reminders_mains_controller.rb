@@ -82,4 +82,18 @@ class RemindersMainsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def get_reminders
+    @reminders = RemindersMain.find(:all)
+
+puts ''
+puts 'reminders'
+    puts @reminders
+
+    if !@reminders.nil?
+      render :json => @reminders.to_json(:include => [:reminderMessages])
+    else          
+      json_error_response(404, "Missing params")
+    end
+  end
 end
