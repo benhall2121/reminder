@@ -14,5 +14,7 @@ Reminder::Application.routes.draw do
 
   
   get "get_reminders" => "reminders_mains#get_reminders", :as => "get_reminders"
+  get "add_reminder" => "reminders_mains#add_reminder", :as => "add_reminder"
+  get "delete_reminder" => "reminders_mains#delete_reminder", :as => "delete_reminder"
 
 end

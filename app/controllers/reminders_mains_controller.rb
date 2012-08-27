@@ -46,7 +46,7 @@ class RemindersMainsController < ApplicationController
 
     respond_to do |format|
       if @reminders_main.save
-        format.html { redirect_to(@reminders_main, :notice => 'Reminders main was successfully created.') }
+        format.html { redirect_to(reminders_mains_path(), :notice => 'Reminders main was successfully created.') }
         format.xml  { render :xml => @reminders_main, :status => :created, :location => @reminders_main }
       else
         format.html { render :action => "new" }
@@ -86,14 +86,38 @@ class RemindersMainsController < ApplicationController
   def get_reminders
     @reminders = RemindersMain.find(:all)
 
-puts ''
-puts 'reminders'
-    puts @reminders
-
     if !@reminders.nil?
       render :json => @reminders.to_json(:include => [:reminderMessages])
     else          
       json_error_response(404, "Missing params")
     end
   end
+
+  def add_reminder
+
+    if params[:reminder_id].to_i > 0
+      @reminders_main = RemindersMain.find(params[:reminder_id].to_i)
+      @rmes = ReminderMessage.find(:first, :conditions => ['reminders_main_id = ?', @reminders_main.id])
+      @rmes.update_attributes(:message => params[:messageComingIn])
+    else
+      @reminders_main = RemindersMain.new
+      reminderMessages = @reminders_main.reminderMessages.build
+      reminderMessages.message = params[:messageComingIn]
+      @reminders_main.save
+    end
+    render :json => @reminders_main.to_json(:include => [:reminderMessages])
+  end
+
+  def delete_reminder
+
+   # @reminder_id = ReminderMessage.find(:all, :conditions => ['message = ?', params[:messageToDeleteID]])
+
+   # @reminder_id.each do |ri|
+      @deleteMe = RemindersMain.find(params[:messageToDeleteID].to_i)
+      @deleteMe.destroy
+   # end
+
+    render :nothing => true
+  end
+
 end
