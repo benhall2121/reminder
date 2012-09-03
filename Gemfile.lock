@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/natescherer/apn_on_rails.git
+  revision: 18f5d37397e3f003152c51b257d9da939b70438f
+  branch: rails3
+  specs:
+    apn_on_rails (0.3.1rails3)
+      configatron
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -32,7 +40,9 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (2.1.2)
     cgi_multipart_eof_fix (2.5.0)
-    cocaine (0.2.1)
+    cocaine (0.3.0)
+    configatron (2.9.1)
+      yamler (>= 0.1.0)
     daemons (1.1.8)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -51,10 +61,9 @@ GEM
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
     mysql2 (0.2.18)
-    paperclip (3.0.1)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    paperclip (2.7.0)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
     polyglot (0.3.3)
@@ -85,15 +94,17 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
     will_paginate (3.0.pre2)
+    yamler (0.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  apn_on_rails!
   bcrypt-ruby
   mongrel
   mysql2 (< 0.3)
-  paperclip (= 3.0.1)
+  paperclip (< 3.0)
   rails (= 3.0.7)
   rake (= 0.9.2.2)
   rest-client

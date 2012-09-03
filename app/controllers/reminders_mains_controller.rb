@@ -1,4 +1,6 @@
 class RemindersMainsController < ApplicationController
+  require 'apn_on_rails'
+
   # GET /reminders_mains
   # GET /reminders_mains.xml
   def index
@@ -116,6 +118,41 @@ class RemindersMainsController < ApplicationController
       @deleteMe = RemindersMain.find(params[:messageToDeleteID].to_i)
       @deleteMe.destroy
    # end
+
+    render :nothing => true
+  end
+
+  def new_apn
+  end
+
+  def send_apn
+
+    puts ''
+    puts 'send_apn'
+    puts 'params[:message]'
+    puts params[:message]
+
+    #THESE CONFIGURATIONS ARE DEFAULT, IF YOU WANT TO CHANGE UNCOMMENT LINES YOU WANT TO CHANGE   
+    #configatron.apn.passphrase  = ''   
+    #configatron.apn.port = 2195   
+    #configatron.apn.host  = 'gateway.sandbox.push.apple.com'   
+    #configatron.apn.cert = File.join(Rails.root, 'config', 'apple_push_notification_development.pem')    
+    #THE CONFIGURATIONS BELOW ARE FOR PRODUCTION PUSH SERVICES, IF YOU WANT TO CHANGE UNCOMMENT LINES YOU WANT TO CHANGE   
+    #configatron.apn.host = 'gateway.push.apple.com'   
+    #configatron.apn.cert = File.join(RAILS_ROOT, 'config', 'apple_push_notification_production.pem')  
+
+    device = APN::Device.find(:first)
+    if device.nil?
+      device = APN::Device.create(:token => "dab65bb5 bdc69fcb c293cd9e 3306f5b8 e508ed0e 2c14a4f5 3c26744b 24ab49b3")   
+    end
+    notification = APN::Notification.new   
+    notification.device = device   
+    notification.badge = 0   
+    notification.sound = true   
+    notification.alert = params[:message]   
+    notification.save  
+
+    system "rake apn:notifications:deliver"
 
     render :nothing => true
   end

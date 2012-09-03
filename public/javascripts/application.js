@@ -1,31 +1,20 @@
 
 $(document).ready(function(){
 	
-  $("#employees th a, #employees .pagination a").live("click", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#employees_search input").keyup(function() {
-    $.get($("#employees_search").attr("action"), $("#employees_search").serialize(), null, "script");
-    return false;
-  });
+  var oldMessage = '';
 
-  $("#assets th a, #assets .pagination a").live("click", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#assets_search input").keyup(function() {
-    $.get($("#assets_search").attr("action"), $("#assets_search").serialize(), null, "script");
-    return false;
-  });
+  $('#apn_message').click(function(){
+    $('#sent_message').html('');
 
-  $("#chk_out_ins th a, #chk_out_ins .pagination a").live("click", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#chk_out_ins_search input").keyup(function() {
-    $.get($("#chk_out_ins_search").attr("action"), $("#chk_out_ins_search").serialize(), null, "script");
-    return false;
+    var newMessage = $('#message').val();
+    
+    if(newMessage != '' && newMessage != oldMessage){
+      $.post('/send_apn',{ 'message': newMessage });
+      $('#sent_message').html('Your message will be delivered shortly');
+      oldMessage = newMessage;
+    } else {
+      alert('Come on!!!, I am not sending the same exact message twice in a row or a blank message. Maybe you should try again.');
+    }
   });
 
 });
